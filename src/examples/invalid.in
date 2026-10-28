@@ -1,0 +1,6 @@
+src/build/invalid-result.txt
+not-a-number
+12x 3
+NaN
+1e100
+9 3

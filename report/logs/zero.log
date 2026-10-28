@@ -1,0 +1,16 @@
+$ ./src/build/parent < src/examples/zero.in
+INPUT:
+src/build/zero-result.txt
+12 2
+8 0
+99 3
+STDERR:
+[parent pid=89799] child=89800; pipe1 sends commands, pipe2 receives status
+[child pid=89800] ppid=89799; output=src/build/zero-result.txt; ready
+[child pid=89800] line=1: result=6
+[child pid=89800] line=2: division by zero; stopping
+[parent pid=89799] division by zero reported by child; stopping
+[parent pid=89799] child=89800 exited status=2; reaped
+Exit code: 2
+OUTPUT FILE:
+6
