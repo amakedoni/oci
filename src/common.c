@@ -65,7 +65,6 @@ int close_fd(int *fd)
     if (*fd < 0) return 0;
     int old = *fd;
     *fd = -1;
-    /* Do not retry close: on Linux the descriptor is already released on EINTR. */
     if (close(old) == -1) { perror("close"); return -1; }
     return 0;
 }
@@ -135,7 +134,6 @@ int reap_child(pid_t pid)
 {
     int status;
     pid_t result;
-    /* Reaping must finish even if the user interrupts cleanup. */
     do { result = waitpid(pid, &status, 0); } while (result == -1 && errno == EINTR);
     if (result == -1) { perror("waitpid"); return EXIT_FAILURE; }
     if (WIFEXITED(status)) {

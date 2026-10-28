@@ -76,7 +76,6 @@ int main(int argc, char **argv)
             else if (log_message("parent", "child channel closed while waiting for input") == -1) perror("log");
             result = EXIT_FAILURE; break;
         }
-        /* Complete a last line without newline so the child can reply before EOF. */
         int failed = write_all(commands[1], line, length);
         if (failed == 0 && line[length - 1] != '\n') failed = write_all(commands[1], "\n", 1);
         free(line);
@@ -91,7 +90,6 @@ int main(int argc, char **argv)
         }
     }
 cleanup:
-    /* Closing pipe1 delivers EOF; closing pipe2 releases any blocked reply writer. */
     if (close_pipes(commands, replies) == -1) result = EXIT_FAILURE;
     if (child > 0) {
         if (interrupted && kill(child, SIGTERM) == -1 && errno != ESRCH) perror("kill child");

@@ -1,5 +1,3 @@
-"""End-to-end checks of the real parent/exec/child processes (stdlib only)."""
-
 import math
 import os
 from pathlib import Path
@@ -142,7 +140,6 @@ class Lab2Tests(unittest.TestCase):
         self.addCleanup(cleanup)
         process.stdin.write(str(self.output).encode() + b"\n")
         process.stdin.flush()
-        # Read only through the READY log; no timing guesses about child startup.
         logs = b""
         import select
         deadline = time.monotonic() + 5
