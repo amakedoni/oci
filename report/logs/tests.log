@@ -4,7 +4,7 @@ test_default_child_path_from_project_root (__main__.Lab2Tests) ... ok
 test_empty_input_and_whitespace (__main__.Lab2Tests) ... ok
 test_empty_or_missing_filename (__main__.Lab2Tests) ... ok
 test_final_line_without_newline (__main__.Lab2Tests) ... ok
-test_full_output_device (__main__.Lab2Tests) ... skipped 'Linux /dev/full is unavailable'
+test_full_output_device (__main__.Lab2Tests) ... skipped 'В системе нет устройства /dev/full'
 test_interrupt_reaps_child (__main__.Lab2Tests) ... ok
 test_invalid_and_nonfinite_numbers_are_rejected (__main__.Lab2Tests) ... ok
 test_long_line_exceeds_pipe_capacity (__main__.Lab2Tests) ... ok
@@ -19,8 +19,8 @@ test_zero_stops_before_next_command (__main__.Lab2Tests) ... ok
 test_zero_terminates_with_input_still_open (__main__.Lab2Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 17 tests in 0.913s
+Ran 17 tests in 0.497s
 
 OK (skipped=1)
 
-Exit code: 0
+Код завершения: 0

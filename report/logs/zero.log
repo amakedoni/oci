@@ -1,14 +1,14 @@
 $ ./src/build/parent < src/examples/zero.in
-INPUT:
+ВВОД:
 src/build/zero-result.txt
 12 2
 8 0
 99 3
-STDERR:
-[parent pid=40136] child=40137
-[child pid=40137] ppid=40136; ready
-[child pid=40137] division by zero
-[parent pid=40136] child=40137 status=2; reaped
-Exit code: 2
-OUTPUT FILE:
+СООБЩЕНИЯ:
+[Родитель PID=58035] потомок=58036
+[Потомок PID=58036] родитель=58035; готов
+[Потомок PID=58036] деление на ноль
+[Родитель PID=58035] потомок=58036, код=2; завершение получено
+Код завершения: 2
+ВЫХОДНОЙ ФАЙЛ:
 6

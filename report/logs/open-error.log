@@ -1,6 +1,7 @@
 $ ./src/build/parent
-[parent pid=40140] child=40141
-child: open output: Is a directory
-parent: child startup: Broken pipe
-[parent pid=40140] child=40141 status=1; reaped
-Exit code: 1
+[Родитель PID=58039] потомок=58040
+Потомок: открытие выходного файла (код ошибки ОС: 21).
+Родитель: получение готовности потомка (код ошибки ОС: 32).
+[Родитель PID=58039] потомок=58040, код=1; завершение получено
+
+Код завершения: 1

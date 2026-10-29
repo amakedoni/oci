@@ -55,7 +55,7 @@ int close_fd(int *fd)
     int old = *fd;
     *fd = -1;
     if (close(old) == -1) {
-        perror("close");
+        report_error("Закрытие дескриптора");
         return -1;
     }
     return 0;
@@ -68,14 +68,20 @@ int reap_child(pid_t pid)
     do { waited = waitpid(pid, &status, 0); }
     while (waited == -1 && errno == EINTR);
     if (waited == -1) {
-        perror("waitpid");
+        report_error("Ожидание потомка");
         return EXIT_FAILURE;
     }
     int code = WIFEXITED(status) ? WEXITSTATUS(status) : EXIT_FAILURE;
-    if (dprintf(STDERR_FILENO, "[parent pid=%ld] child=%ld status=%d; reaped\n",
+    if (dprintf(STDERR_FILENO, "[Родитель PID=%ld] потомок=%ld, код=%d; завершение получено\n",
                 (long)getpid(), (long)pid, code) < 0) {
-        perror("parent: log");
+        report_error("Родитель: запись сообщения");
         return EXIT_FAILURE;
     }
     return code;
+}
+
+void report_error(const char *message)
+{
+    int code = errno;
+    fprintf(stderr, "%s (код ошибки ОС: %d).\n", message, code);
 }

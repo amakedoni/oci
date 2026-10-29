@@ -1,10 +1,12 @@
-$ make -C src all
+$ make -C src -B all
+mkdir -p build
 cc -D_POSIX_C_SOURCE=200809L -std=c11 -O2 -g -Wall -Wextra -Wpedantic -Werror -MMD -MP -c parent.c -o build/parent.o
 cc -D_POSIX_C_SOURCE=200809L -std=c11 -O2 -g -Wall -Wextra -Wpedantic -Werror -MMD -MP -c common.c -o build/common.o
 cc -std=c11 -O2 -g -Wall -Wextra -Wpedantic -Werror  build/parent.o build/common.o  -o build/parent
+cc -D_POSIX_C_SOURCE=200809L -std=c11 -O2 -g -Wall -Wextra -Wpedantic -Werror -MMD -MP -c child.c -o build/child.o
 cc -std=c11 -O2 -g -Wall -Wextra -Wpedantic -Werror  build/child.o build/common.o  -o build/child
 
-Exit code: 0
+Код завершения: 0
 
-$ cc --analyze parent.c child.c common.c
-Exit code: 0
+$ cc --analyze -D_POSIX_C_SOURCE=200809L parent.c child.c common.c
+Код завершения: 0

@@ -1,17 +1,17 @@
 $ ./src/build/parent < src/examples/normal.in
-INPUT:
+ВВОД:
 src/build/results.txt
 100 2 5
 7.5 2.5
 -24 2 -3
 0 5
 0.5
-STDERR:
-[parent pid=40134] child=40135
-[child pid=40135] ppid=40134; ready
-[parent pid=40134] child=40135 status=0; reaped
-Exit code: 0
-OUTPUT FILE:
+СООБЩЕНИЯ:
+[Родитель PID=58033] потомок=58034
+[Потомок PID=58034] родитель=58033; готов
+[Родитель PID=58033] потомок=58034, код=0; завершение получено
+Код завершения: 0
+ВЫХОДНОЙ ФАЙЛ:
 10
 3
 4

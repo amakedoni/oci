@@ -37,43 +37,43 @@ static enum calculation divide_line(const char *line, float *result)
 
 int main(int argc, char **argv)
 {
-    if (argc != 2) { fputs("Usage: child output_file\n", stderr); return 1; }
-    if (setup_signals() == -1) { perror("sigaction"); return 1; }
+    if (argc != 2) { fputs("Запуск: child выходной_файл\n", stderr); return 1; }
+    if (setup_signals() == -1) { report_error("Настройка сигналов"); return 1; }
     int result = EXIT_FAILURE;
     int output = open(argv[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
     char *line = NULL;
     size_t capacity = 0;
-    if (output == -1) { perror("child: open output"); goto cleanup; }
-    if (dprintf(STDERR_FILENO, "[child pid=%ld] ppid=%ld; ready\n",
-                (long)getpid(), (long)getppid()) < 0) { perror("child: log"); goto cleanup; }
-    if (write_byte(STDOUT_FILENO, 'A') == -1) { perror("child: reply"); goto cleanup; }
+    if (output == -1) { report_error("Потомок: открытие выходного файла"); goto cleanup; }
+    if (dprintf(STDERR_FILENO, "[Потомок PID=%ld] родитель=%ld; готов\n",
+                (long)getpid(), (long)getppid()) < 0) { report_error("Потомок: запись сообщения"); goto cleanup; }
+    if (write_byte(STDOUT_FILENO, 'A') == -1) { report_error("Потомок: отправка ответа"); goto cleanup; }
 
     while (!interrupted) {
         ssize_t length = getline(&line, &capacity, stdin);
         if (length == -1) {
             if (feof(stdin)) result = EXIT_SUCCESS;
-            else perror("child: getline");
+            else report_error("Потомок: чтение команды");
             break;
         }
         float value = 0.0f;
         enum calculation status = memchr(line, '\0', (size_t)length) != NULL
             ? CALC_INVALID : divide_line(line, &value);
         if (status == CALC_ZERO) {
-            if (dprintf(STDERR_FILENO, "[child pid=%ld] division by zero\n",
-                        (long)getpid()) < 0) { perror("child: log"); goto cleanup; }
-            if (write_byte(STDOUT_FILENO, 'Z') == -1) { perror("child: reply"); goto cleanup; }
+            if (dprintf(STDERR_FILENO, "[Потомок PID=%ld] деление на ноль\n",
+                        (long)getpid()) < 0) { report_error("Потомок: запись сообщения"); goto cleanup; }
+            if (write_byte(STDOUT_FILENO, 'Z') == -1) { report_error("Потомок: отправка ответа"); goto cleanup; }
             result = EXIT_ZERO_DIVISION;
             break;
         }
         if (status == CALC_INVALID) {
-            if (dprintf(STDERR_FILENO, "[child pid=%ld] invalid input; skipped\n",
-                        (long)getpid()) < 0) { perror("child: log"); goto cleanup; }
+            if (dprintf(STDERR_FILENO, "[Потомок PID=%ld] неверный ввод; строка пропущена\n",
+                        (long)getpid()) < 0) { report_error("Потомок: запись сообщения"); goto cleanup; }
         }
         if (status == CALC_OK && dprintf(output, "%.*g\n", FLT_DECIMAL_DIG, (double)value) < 0) {
-            perror("child: write output");
+            report_error("Потомок: запись результата");
             goto cleanup;
         }
-        if (write_byte(STDOUT_FILENO, 'A') == -1) { perror("child: reply"); goto cleanup; }
+        if (write_byte(STDOUT_FILENO, 'A') == -1) { report_error("Потомок: отправка ответа"); goto cleanup; }
     }
 cleanup:
     free(line);

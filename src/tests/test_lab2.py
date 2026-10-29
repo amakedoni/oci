@@ -38,9 +38,9 @@ class Lab2Tests(unittest.TestCase):
         result = self.run_commands("100 2 5\n7.5 2.5\n-24 2 -3\n0 5\n.5\n1e2 2e1\n")
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(self.values(), [10, 3, 4, 0, .5, 5])
-        self.assertRegex(result.stderr.decode(), r"\[parent pid=\d+\]")
-        self.assertRegex(result.stderr.decode(), r"\[child pid=\d+\]")
-        self.assertIn(b"reaped", result.stderr)
+        self.assertRegex(result.stderr.decode(), r"\[Родитель PID=\d+\]")
+        self.assertRegex(result.stderr.decode(), r"\[Потомок PID=\d+\]")
+        self.assertIn("завершение получено".encode(), result.stderr)
 
     def test_default_child_path_from_project_root(self):
         data = str(self.output).encode() + b"\n12 2 3\n"
@@ -55,8 +55,8 @@ class Lab2Tests(unittest.TestCase):
                 result = self.run_commands(f"12 2\n8 {zero}\n99 3\n")
                 self.assertEqual(result.returncode, 2, result.stderr)
                 self.assertEqual(self.values(), [6])
-                self.assertIn(b"division by zero", result.stderr)
-                self.assertIn(b"status=2; reaped", result.stderr)
+                self.assertIn("деление на ноль".encode(), result.stderr)
+                self.assertIn("код=2; завершение получено".encode(), result.stderr)
 
     def test_invalid_and_nonfinite_numbers_are_rejected(self):
         result = self.run_commands(
@@ -65,7 +65,7 @@ class Lab2Tests(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(self.values(), [3])
-        self.assertEqual(result.stderr.count(b"skipped"), 9)
+        self.assertEqual(result.stderr.count("строка пропущена".encode()), 9)
 
     def test_empty_input_and_whitespace(self):
         result = self.run_commands("\n \t\r\n")
@@ -103,20 +103,20 @@ class Lab2Tests(unittest.TestCase):
     def test_unwritable_output(self):
         result = self.run_commands("8 2\n", output=self.folder / "missing/result")
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn(b"open output", result.stderr)
-        self.assertIn(b"reaped", result.stderr)
+        self.assertIn("открытие выходного файла".encode(), result.stderr)
+        self.assertIn("завершение получено".encode(), result.stderr)
 
-    @unittest.skipUnless(Path("/dev/full").exists(), "Linux /dev/full is unavailable")
+    @unittest.skipUnless(Path("/dev/full").exists(), "В системе нет устройства /dev/full")
     def test_full_output_device(self):
         result = self.run_commands("8 2\n", output="/dev/full")
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn(b"write output", result.stderr)
+        self.assertIn("запись результата".encode(), result.stderr)
 
     def test_missing_child_executable(self):
         result = self.run_commands("8 2\n", child=self.folder / "missing-child")
         self.assertEqual(result.returncode, 127, result.stderr)
-        self.assertIn(b"execvp", result.stderr)
-        self.assertIn(b"reaped", result.stderr)
+        self.assertIn("Запуск программы потомка".encode(), result.stderr)
+        self.assertIn("завершение получено".encode(), result.stderr)
 
     def test_pipe_descriptor_exhaustion(self):
         def limit_descriptors():
@@ -124,7 +124,7 @@ class Lab2Tests(unittest.TestCase):
         result = subprocess.run([str(PARENT)], input=str(self.output).encode() + b"\n",
                                 capture_output=True, timeout=5, preexec_fn=limit_descriptors)
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn(b"pipe2", result.stderr)
+        self.assertIn("Создание канала ответов".encode(), result.stderr)
 
     def test_peer_disappears_after_ready(self):
         fake = self.folder / "fake-child"
@@ -132,7 +132,7 @@ class Lab2Tests(unittest.TestCase):
         fake.chmod(0o755)
         result = self.run_commands("42 " + "1 " * 100000 + "\n", child=fake)
         self.assertEqual(result.returncode, 7, result.stderr)
-        self.assertIn(b"reaped", result.stderr)
+        self.assertIn("завершение получено".encode(), result.stderr)
 
     def interactive(self):
         process = subprocess.Popen([str(PARENT), str(PARENT.with_name("child"))], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
@@ -150,7 +150,7 @@ class Lab2Tests(unittest.TestCase):
         logs = b""
         import select
         deadline = time.monotonic() + 5
-        while b"; ready\n" not in logs:
+        while "; готов\n".encode() not in logs:
             self.assertLess(time.monotonic(), deadline, logs)
             ready, _, _ = select.select([process.stderr], [], [], .1)
             if ready:
@@ -164,20 +164,20 @@ class Lab2Tests(unittest.TestCase):
         process.stdin.write(b"8 0\n")
         process.stdin.flush()
         self.assertEqual(process.wait(timeout=5), 2)
-        self.assertIn(b"reaped", logs + process.stderr.read())
+        self.assertIn("завершение получено".encode(), logs + process.stderr.read())
 
     def test_parent_detects_dead_child_while_waiting_for_input(self):
         process, logs = self.interactive()
-        child_pid = int(re.search(rb"\[child pid=(\d+)\]", logs)[1])
+        child_pid = int(re.search(r"\[Потомок PID=(\d+)\]".encode(), logs)[1])
         os.kill(child_pid, signal.SIGKILL)
         self.assertNotEqual(process.wait(timeout=5), 0)
-        self.assertIn(b"reaped", logs + process.stderr.read())
+        self.assertIn("завершение получено".encode(), logs + process.stderr.read())
 
     def test_interrupt_reaps_child(self):
         process, logs = self.interactive()
         os.kill(process.pid, signal.SIGTERM)
         self.assertEqual(process.wait(timeout=5), 128 + signal.SIGTERM)
-        self.assertIn(b"reaped", logs + process.stderr.read())
+        self.assertIn("завершение получено".encode(), logs + process.stderr.read())
 
 
 if __name__ == "__main__":

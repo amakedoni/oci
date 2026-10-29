@@ -1,19 +1,19 @@
 $ ./src/build/parent < src/examples/invalid.in
-INPUT:
+ВВОД:
 src/build/invalid-result.txt
 not-a-number
 12x 3
 NaN
 1e100
 9 3
-STDERR:
-[parent pid=40138] child=40139
-[child pid=40139] ppid=40138; ready
-[child pid=40139] invalid input; skipped
-[child pid=40139] invalid input; skipped
-[child pid=40139] invalid input; skipped
-[child pid=40139] invalid input; skipped
-[parent pid=40138] child=40139 status=0; reaped
-Exit code: 0
-OUTPUT FILE:
+СООБЩЕНИЯ:
+[Родитель PID=58037] потомок=58038
+[Потомок PID=58038] родитель=58037; готов
+[Потомок PID=58038] неверный ввод; строка пропущена
+[Потомок PID=58038] неверный ввод; строка пропущена
+[Потомок PID=58038] неверный ввод; строка пропущена
+[Потомок PID=58038] неверный ввод; строка пропущена
+[Родитель PID=58037] потомок=58038, код=0; завершение получено
+Код завершения: 0
+ВЫХОДНОЙ ФАЙЛ:
 3

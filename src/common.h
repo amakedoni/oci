@@ -14,4 +14,6 @@ int receive_reply(int fd);
 int close_fd(int *fd);
 int reap_child(pid_t pid);
 
+void report_error(const char *message);
+
 #endif
