@@ -18,7 +18,7 @@ test_zero_stops_before_next_command (__main__.Lab2Tests) ... ok
 test_zero_terminates_with_input_still_open (__main__.Lab2Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 16 tests in 0.677s
+Ran 16 tests in 0.808s
 
 OK (skipped=1)
 

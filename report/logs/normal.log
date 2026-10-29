@@ -7,14 +7,14 @@ src/build/results.txt
 0 5
 0.5
 STDERR:
-[parent pid=89797] child=89798; pipe1 sends commands, pipe2 receives status
-[child pid=89798] ppid=89797; output=src/build/results.txt; ready
-[child pid=89798] line=1: result=10
-[child pid=89798] line=2: result=3
-[child pid=89798] line=3: result=4
-[child pid=89798] line=4: result=0
-[child pid=89798] line=5: result=0.5
-[parent pid=89797] child=89798 exited status=0; reaped
+[parent pid=27732] child=27733; pipe1 sends commands, pipe2 receives status
+[child pid=27733] ppid=27732; output=src/build/results.txt; ready
+[child pid=27733] line=1: result=10
+[child pid=27733] line=2: result=3
+[child pid=27733] line=3: result=4
+[child pid=27733] line=4: result=0
+[child pid=27733] line=5: result=0.5
+[parent pid=27732] child=27733 exited status=0; reaped
 Exit code: 0
 OUTPUT FILE:
 10

@@ -18,7 +18,10 @@ enum calculation divide_line(const char *line, float *result)
         if (end == position || (*end != '\0' && !isspace((unsigned char)*end)))
             return CALC_INVALID;
         if (errno == ERANGE || !isfinite(value)) return CALC_RANGE;
-        if (first) { *result = value; first = 0; }
+        if (first) {
+            *result = value;
+            first = 0;
+        }
         else {
             if (value == 0.0f) return CALC_ZERO;
             *result /= value;

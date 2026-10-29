@@ -5,12 +5,12 @@ src/build/zero-result.txt
 8 0
 99 3
 STDERR:
-[parent pid=89799] child=89800; pipe1 sends commands, pipe2 receives status
-[child pid=89800] ppid=89799; output=src/build/zero-result.txt; ready
-[child pid=89800] line=1: result=6
-[child pid=89800] line=2: division by zero; stopping
-[parent pid=89799] division by zero reported by child; stopping
-[parent pid=89799] child=89800 exited status=2; reaped
+[parent pid=27734] child=27735; pipe1 sends commands, pipe2 receives status
+[child pid=27735] ppid=27734; output=src/build/zero-result.txt; ready
+[child pid=27735] line=1: result=6
+[child pid=27735] line=2: division by zero; stopping
+[parent pid=27734] division by zero reported by child; stopping
+[parent pid=27734] child=27735 exited status=2; reaped
 Exit code: 2
 OUTPUT FILE:
 6

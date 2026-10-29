@@ -1,6 +1,4 @@
-$ make -C src clean all
-rm -rf build
-mkdir -p build
+$ make -C src all
 cc -D_POSIX_C_SOURCE=200809L -std=c11 -O2 -g -Wall -Wextra -Wpedantic -Werror -MMD -MP -c parent.c -o build/parent.o
 cc -D_POSIX_C_SOURCE=200809L -std=c11 -O2 -g -Wall -Wextra -Wpedantic -Werror -MMD -MP -c common.c -o build/common.o
 cc -std=c11 -O2 -g -Wall -Wextra -Wpedantic -Werror  build/parent.o build/common.o  -o build/parent
