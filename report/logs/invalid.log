@@ -7,14 +7,13 @@ NaN
 1e100
 9 3
 STDERR:
-[parent pid=27736] child=27737; pipe1 sends commands, pipe2 receives status
-[child pid=27737] ppid=27736; output=src/build/invalid-result.txt; ready
-[child pid=27737] line=1: invalid float token; skipped
-[child pid=27737] line=2: invalid float token; skipped
-[child pid=27737] line=3: float out of range; skipped
-[child pid=27737] line=4: float out of range; skipped
-[child pid=27737] line=5: result=3
-[parent pid=27736] child=27737 exited status=0; reaped
+[parent pid=40138] child=40139
+[child pid=40139] ppid=40138; ready
+[child pid=40139] invalid input; skipped
+[child pid=40139] invalid input; skipped
+[child pid=40139] invalid input; skipped
+[child pid=40139] invalid input; skipped
+[parent pid=40138] child=40139 status=0; reaped
 Exit code: 0
 OUTPUT FILE:
 3

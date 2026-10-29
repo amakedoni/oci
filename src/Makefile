@@ -17,7 +17,7 @@ $(BUILD)/%.o: %.c | $(BUILD)
 $(BUILD)/parent: $(BUILD)/parent.o $(BUILD)/common.o
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
-$(BUILD)/child: $(BUILD)/child.o $(BUILD)/common.o $(BUILD)/division.o
+$(BUILD)/child: $(BUILD)/child.o $(BUILD)/common.o
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
 test: all

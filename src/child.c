@@ -1,87 +1,82 @@
 #include "common.h"
-#include "division.h"
 
+#include <ctype.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <float.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
-static int send_reply(enum reply reply)
+enum calculation { CALC_OK, CALC_EMPTY, CALC_INVALID, CALC_ZERO };
+
+static enum calculation divide_line(const char *line, float *result)
 {
-    unsigned char byte = (unsigned char)reply;
-    if (write_all(STDOUT_FILENO, &byte, 1) == -1) {
-        perror("child: pipe2 write");
-        return -1;
+    int first = 1;
+    while (*line != '\0') {
+        while (isspace((unsigned char)*line)) ++line;
+        if (*line == '\0') break;
+        char *end;
+        errno = 0;
+        float number = strtof(line, &end);
+        if (end == line || (*end != '\0' && !isspace((unsigned char)*end)))
+            return CALC_INVALID;
+        if (errno == ERANGE || !isfinite(number)) return CALC_INVALID;
+        if (first) { *result = number; first = 0; }
+        else {
+            if (number == 0.0f) return CALC_ZERO;
+            *result /= number;
+            if (!isfinite(*result)) return CALC_INVALID;
+        }
+        line = end;
     }
-    return 0;
+    return first ? CALC_EMPTY : CALC_OK;
 }
 
 int main(int argc, char **argv)
 {
-    if (argc != 2) {
-        fputs("Usage: child output_file (stdin=pipe1, stdout=pipe2)\n", stderr);
-        return 1;
-    }
-    if (setup_signals() == -1) {
-        perror("child: sigaction");
-        return 1;
-    }
+    if (argc != 2) { fputs("Usage: child output_file\n", stderr); return 1; }
+    if (setup_signals() == -1) { perror("sigaction"); return 1; }
     int result = EXIT_FAILURE;
     int output = open(argv[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (output == -1) {
-        perror("child: open output");
-        if (send_reply(FAILED) == -1) perror("notify");
-        return 1;
-    }
-    if (dprintf(STDERR_FILENO, "[child pid=%ld] ppid=%ld; output=%s; ready\n", (long)getpid(), (long)getppid(), argv[1]) < 0) goto cleanup;
-    if (send_reply(READY) == -1) goto cleanup;
-    size_t number = 0;
-    for (;;) {
-        char *line = NULL;
-        size_t size;
-        int status = read_line(STDIN_FILENO, -1, &line, &size);
-        if (status == -1) {
-            perror("child: read line");
-            if (send_reply(FAILED) == -1) perror("notify");
-            goto cleanup;
-        }
-        if (status == 0) {
-            free(line);
-            result = EXIT_SUCCESS;
+    char *line = NULL;
+    size_t capacity = 0;
+    if (output == -1) { perror("child: open output"); goto cleanup; }
+    if (dprintf(STDERR_FILENO, "[child pid=%ld] ppid=%ld; ready\n",
+                (long)getpid(), (long)getppid()) < 0) { perror("child: log"); goto cleanup; }
+    if (write_byte(STDOUT_FILENO, 'A') == -1) { perror("child: reply"); goto cleanup; }
+
+    while (!interrupted) {
+        ssize_t length = getline(&line, &capacity, stdin);
+        if (length == -1) {
+            if (feof(stdin)) result = EXIT_SUCCESS;
+            else perror("child: getline");
             break;
         }
-        ++number;
         float value = 0.0f;
-        enum calculation calculation = memchr(line, '\0', size) != NULL
+        enum calculation status = memchr(line, '\0', (size_t)length) != NULL
             ? CALC_INVALID : divide_line(line, &value);
-        free(line);
-        if (calculation == CALC_ZERO) {
-            if (dprintf(STDERR_FILENO, "[child pid=%ld] line=%zu: division by zero; stopping\n", (long)getpid(), number) < 0) goto cleanup;
-            if (send_reply(ZERO) == -1) goto cleanup;
+        if (status == CALC_ZERO) {
+            if (dprintf(STDERR_FILENO, "[child pid=%ld] division by zero\n",
+                        (long)getpid()) < 0) { perror("child: log"); goto cleanup; }
+            if (write_byte(STDOUT_FILENO, 'Z') == -1) { perror("child: reply"); goto cleanup; }
             result = EXIT_ZERO_DIVISION;
             break;
         }
-        if (calculation == CALC_INVALID || calculation == CALC_RANGE) {
-            if (dprintf(STDERR_FILENO, "[child pid=%ld] line=%zu: %s; skipped\n", (long)getpid(), number,
-                            calculation == CALC_INVALID ? "invalid float token" : "float out of range") < 0)
-                goto cleanup;
-            if (send_reply(INVALID) == -1) goto cleanup;
-            continue;
+        if (status == CALC_INVALID) {
+            if (dprintf(STDERR_FILENO, "[child pid=%ld] invalid input; skipped\n",
+                        (long)getpid()) < 0) { perror("child: log"); goto cleanup; }
         }
-        if (calculation == CALC_OK) {
-            if (dprintf(output, "%.*g\n", FLT_DECIMAL_DIG, (double)value) < 0) {
-                perror("child: write output");
-                if (send_reply(FAILED) == -1) perror("notify");
-                goto cleanup;
-            }
-            if (dprintf(STDERR_FILENO, "[child pid=%ld] line=%zu: result=%.*g\n", (long)getpid(), number, FLT_DECIMAL_DIG, (double)value) < 0)
-                goto cleanup;
+        if (status == CALC_OK && dprintf(output, "%.*g\n", FLT_DECIMAL_DIG, (double)value) < 0) {
+            perror("child: write output");
+            goto cleanup;
         }
-        if (send_reply(ACCEPTED) == -1) goto cleanup;
+        if (write_byte(STDOUT_FILENO, 'A') == -1) { perror("child: reply"); goto cleanup; }
     }
 cleanup:
+    free(line);
     if (close_fd(&output) == -1) result = EXIT_FAILURE;
     int in = STDIN_FILENO, out = STDOUT_FILENO;
     if (close_fd(&in) == -1) result = EXIT_FAILURE;

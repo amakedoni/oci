@@ -1,8 +1,32 @@
 $ make -C src sanitize
+/Library/Developer/CommandLineTools/usr/bin/make BUILD=build/sanitize CFLAGS='-std=c11 -O1 -g -Wall -Wextra -Wpedantic -Werror -fsanitize=address,undefined -fno-omit-frame-pointer' test
+cc -D_POSIX_C_SOURCE=200809L -std=c11 -O1 -g -Wall -Wextra -Wpedantic -Werror -fsanitize=address,undefined -fno-omit-frame-pointer -MMD -MP -c parent.c -o build/sanitize/parent.o
+cc -D_POSIX_C_SOURCE=200809L -std=c11 -O1 -g -Wall -Wextra -Wpedantic -Werror -fsanitize=address,undefined -fno-omit-frame-pointer -MMD -MP -c common.c -o build/sanitize/common.o
+cc -std=c11 -O1 -g -Wall -Wextra -Wpedantic -Werror -fsanitize=address,undefined -fno-omit-frame-pointer  build/sanitize/parent.o build/sanitize/common.o  -o build/sanitize/parent
+cc -D_POSIX_C_SOURCE=200809L -std=c11 -O1 -g -Wall -Wextra -Wpedantic -Werror -fsanitize=address,undefined -fno-omit-frame-pointer -MMD -MP -c child.c -o build/sanitize/child.o
+cc -std=c11 -O1 -g -Wall -Wextra -Wpedantic -Werror -fsanitize=address,undefined -fno-omit-frame-pointer  build/sanitize/child.o build/sanitize/common.o  -o build/sanitize/child
+LAB2_PARENT='/Users/alexander/Documents/oci/src/build/sanitize/parent' python3 tests/test_lab2.py
+test_default_child_path_from_project_root (__main__.Lab2Tests) ... ok
+test_empty_input_and_whitespace (__main__.Lab2Tests) ... ok
+test_empty_or_missing_filename (__main__.Lab2Tests) ... ok
+test_final_line_without_newline (__main__.Lab2Tests) ... ok
+test_full_output_device (__main__.Lab2Tests) ... skipped 'Linux /dev/full is unavailable'
+test_interrupt_reaps_child (__main__.Lab2Tests) ... ok
+test_invalid_and_nonfinite_numbers_are_rejected (__main__.Lab2Tests) ... ok
+test_long_line_exceeds_pipe_capacity (__main__.Lab2Tests) ... ok
+test_many_commands_and_float_rounding (__main__.Lab2Tests) ... ok
+test_missing_child_executable (__main__.Lab2Tests) ... ok
+test_parent_detects_dead_child_while_waiting_for_input (__main__.Lab2Tests) ... ok
+test_peer_disappears_after_ready (__main__.Lab2Tests) ... ok
+test_pipe_descriptor_exhaustion (__main__.Lab2Tests) ... ok
+test_sequential_float_division (__main__.Lab2Tests) ... ok
+test_unwritable_output (__main__.Lab2Tests) ... ok
+test_zero_stops_before_next_command (__main__.Lab2Tests) ... ok
+test_zero_terminates_with_input_still_open (__main__.Lab2Tests) ... ok
 
-Ran 16 tests in 1.212s
+----------------------------------------------------------------------
+Ran 17 tests in 1.083s
+
 OK (skipped=1)
 
-AddressSanitizer and UndefinedBehaviorSanitizer enabled; no sanitizer diagnostics.
-Linux /dev/full test skipped because the device is unavailable on macOS.
 Exit code: 0

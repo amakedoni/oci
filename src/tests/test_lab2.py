@@ -25,7 +25,7 @@ class Lab2Tests(unittest.TestCase):
         data = str(output or self.output).encode() + b"\n"
         data += commands.encode() if isinstance(commands, str) else commands
         result = subprocess.run(
-            [str(PARENT)] + ([str(child)] if child else []), input=data,
+            [str(PARENT), str(child or PARENT.with_name("child"))], input=data,
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10,
         )
         self.assertEqual(result.stdout, b"", result)
@@ -41,6 +41,13 @@ class Lab2Tests(unittest.TestCase):
         self.assertRegex(result.stderr.decode(), r"\[parent pid=\d+\]")
         self.assertRegex(result.stderr.decode(), r"\[child pid=\d+\]")
         self.assertIn(b"reaped", result.stderr)
+
+    def test_default_child_path_from_project_root(self):
+        data = str(self.output).encode() + b"\n12 2 3\n"
+        result = subprocess.run([str(PARENT)], cwd=ROOT.parent, input=data,
+                                capture_output=True, timeout=5)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.values(), [2])
 
     def test_zero_stops_before_next_command(self):
         for zero in ("0", "-0", "0.0", "0e5"):
@@ -121,14 +128,14 @@ class Lab2Tests(unittest.TestCase):
 
     def test_peer_disappears_after_ready(self):
         fake = self.folder / "fake-child"
-        fake.write_text("#!/bin/sh\nprintf R\nexit 7\n")
+        fake.write_text("#!/bin/sh\nprintf A\nexit 7\n")
         fake.chmod(0o755)
         result = self.run_commands("42 " + "1 " * 100000 + "\n", child=fake)
         self.assertEqual(result.returncode, 7, result.stderr)
         self.assertIn(b"reaped", result.stderr)
 
     def interactive(self):
-        process = subprocess.Popen([str(PARENT)], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+        process = subprocess.Popen([str(PARENT), str(PARENT.with_name("child"))], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE, start_new_session=True)
 
         def cleanup():

@@ -1,6 +1,6 @@
 $ ./src/build/parent
-[parent pid=27738] child=27739; pipe1 sends commands, pipe2 receives status
+[parent pid=40140] child=40141
 child: open output: Is a directory
-[parent pid=27738] child=27739 exited status=1; reaped
-
+parent: child startup: Broken pipe
+[parent pid=40140] child=40141 status=1; reaped
 Exit code: 1

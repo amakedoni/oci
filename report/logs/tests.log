@@ -1,5 +1,6 @@
 $ make -C src test
 LAB2_PARENT='/Users/alexander/Documents/oci/src/build/parent' python3 tests/test_lab2.py
+test_default_child_path_from_project_root (__main__.Lab2Tests) ... ok
 test_empty_input_and_whitespace (__main__.Lab2Tests) ... ok
 test_empty_or_missing_filename (__main__.Lab2Tests) ... ok
 test_final_line_without_newline (__main__.Lab2Tests) ... ok
@@ -18,7 +19,7 @@ test_zero_stops_before_next_command (__main__.Lab2Tests) ... ok
 test_zero_terminates_with_input_still_open (__main__.Lab2Tests) ... ok
 
 ----------------------------------------------------------------------
-Ran 16 tests in 0.808s
+Ran 17 tests in 0.913s
 
 OK (skipped=1)
 
