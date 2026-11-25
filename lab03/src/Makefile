@@ -1,5 +1,8 @@
+CC = gcc
+CFLAGS = -std=gnu11 -Wall -Wextra -pthread -O2
+
 all:
-	gcc parent.c child.c -o lab3 -pthread -O2
+	$(CC) $(CFLAGS) parent.c child.c -o lab3
 
 clean:
 	rm -f lab3

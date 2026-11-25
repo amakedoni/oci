@@ -1,6 +1,6 @@
 
 CC = gcc
-CFLAGS = -std=c11 -Wall -Wextra
+CFLAGS = -std=gnu11 -Wall -Wextra
 
 all: parent child
 
