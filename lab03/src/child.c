@@ -41,7 +41,8 @@ void *worker(void *arg) {
     return NULL;
 }
 
-void kmeans(double points[][2], int n, int k, int t) {
+int kmeans(double points[][2], int n, int k, int t) {
+    int status = EXIT_FAILURE;
     double (*centers)[2] = malloc(k * sizeof(*centers));
     double (*sum)[2] = malloc(k * sizeof(*sum));
     int *labels = malloc(n * sizeof(int));
@@ -156,6 +157,7 @@ void kmeans(double points[][2], int n, int k, int t) {
     }
 
     printf("\nВремя выполнения: %.9f секунд\n", time);
+    status = EXIT_SUCCESS;
 
 cleanup:
     free(centers);
@@ -164,4 +166,5 @@ cleanup:
     free(count);
     free(threads);
     free(data);
+    return status;
 }

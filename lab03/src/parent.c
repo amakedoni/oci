@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 
-void kmeans(double points[][2], int n, int k, int t);
+int kmeans(double points[][2], int n, int k, int t);
 
 int main(int argc, char *argv[]) {
     if (argc != 3 || strcmp(argv[1], "-t") != 0) {
@@ -54,9 +54,9 @@ int main(int argc, char *argv[]) {
     printf("PID процесса: %d\n", getpid());
     printf("Количество потоков: %d\n", t);
 
-    kmeans(points, n, k, t);
+    int status = kmeans(points, n, k, t);
 
     free(points);
 
-    return 0;
+    return status;
 }

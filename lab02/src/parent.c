@@ -108,7 +108,7 @@ int main(void) {
 
     printf("Введите числа:\n");
 
-    ssize_t len;
+    ssize_t len = 0;
 
     while (!error && (len = getline(&line, &size, stdin)) != -1) {
         if (send_line(p1[1], line, len) ||
@@ -141,7 +141,7 @@ int main(void) {
         }
     }
 
-    if (!error && !feof(stdin)) {
+    if (!error && len == -1 && !feof(stdin)) {
         perror("Ошибка getline");
         error = 1;
     }

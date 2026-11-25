@@ -1,210 +1,135 @@
-811   execve("./src/build/parent", ["./src/build/parent"], 0xfffff851bde0 /* 5 vars */) = 0
-811   brk(NULL)                         = 0xaaaad9e1e000
-811   mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xffffadd1e000
-811   faccessat(AT_FDCWD</tmp/lab2>, "/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
-811   openat(AT_FDCWD</tmp/lab2>, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</etc/ld.so.cache>
-811   fstat(3</etc/ld.so.cache>, {st_mode=S_IFREG|0644, st_size=7247, ...}) = 0
-811   mmap(NULL, 7247, PROT_READ, MAP_PRIVATE, 3</etc/ld.so.cache>, 0) = 0xffffadd1c000
-811   close(3</etc/ld.so.cache>)        = 0
-811   openat(AT_FDCWD</tmp/lab2>, "/lib/aarch64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/aarch64-linux-gnu/libc.so.6>
-811   read(3</usr/lib/aarch64-linux-gnu/libc.so.6>, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\360\206\2\0\0\0\0\0"..., 832) = 832
-811   fstat(3</usr/lib/aarch64-linux-gnu/libc.so.6>, {st_mode=S_IFREG|0755, st_size=1722920, ...}) = 0
-811   mmap(NULL, 1892240, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0xffffadb1a000
-811   mmap(0xffffadb20000, 1826704, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3</usr/lib/aarch64-linux-gnu/libc.so.6>, 0) = 0xffffadb20000
-811   munmap(0xffffadb1a000, 24576)     = 0
-811   munmap(0xffffadcde000, 40848)     = 0
-811   mprotect(0xffffadcba000, 77824, PROT_NONE) = 0
-811   mmap(0xffffadccd000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3</usr/lib/aarch64-linux-gnu/libc.so.6>, 0x19d000) = 0xffffadccd000
-811   mmap(0xffffadcd2000, 49040, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xffffadcd2000
-811   close(3</usr/lib/aarch64-linux-gnu/libc.so.6>) = 0
-811   set_tid_address(0xffffadd1efb0)   = 811
-811   set_robust_list(0xffffadd1efc0, 24) = 0
-811   rseq(0xffffadd1f600, 0x20, 0, 0xd428bc00) = 0
-811   mprotect(0xffffadccd000, 12288, PROT_READ) = 0
-811   mprotect(0xaaaabda9f000, 4096, PROT_READ) = 0
-811   mprotect(0xffffadd26000, 8192, PROT_READ) = 0
-811   prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
-811   munmap(0xffffadd1c000, 7247)      = 0
-811   rt_sigaction(SIGPIPE, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=0}, NULL, 8) = 0
-811   rt_sigaction(SIGINT, {sa_handler=0xaaaabda815f0, sa_mask=[], sa_flags=0}, NULL, 8) = 0
-811   rt_sigaction(SIGTERM, {sa_handler=0xaaaabda815f0, sa_mask=[], sa_flags=0}, NULL, 8) = 0
-811   getrandom("\xf5\xff\x27\x22\x71\x01\x50\x28", 8, GRND_NONBLOCK) = 8
-811   brk(NULL)                         = 0xaaaad9e1e000
-811   brk(0xaaaad9e3f000)               = 0xaaaad9e3f000
-811   read(0</tmp/lab2/src/examples/zero.in>, "s", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "r", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "c", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "/", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "b", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "u", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "i", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "l", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "d", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "/", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "z", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "e", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "r", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "o", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "-", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "r", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "e", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "s", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "u", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "l", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "t", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, ".", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "t", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "x", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "t", 1) = 1
-811   read(0</tmp/lab2/src/examples/zero.in>, "\n", 1) = 1
-811   pipe2([3<pipe:[1547]>, 4<pipe:[1547]>], 0) = 0
-811   pipe2([5<pipe:[1548]>, 6<pipe:[1548]>], 0) = 0
-811   clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0xffffadd1efb0) = 812
-812   set_robust_list(0xffffadd1efc0, 24 <unfinished ...>
-811   close(3<pipe:[1547]> <unfinished ...>
-812   <... set_robust_list resumed>)    = 0
-811   <... close resumed>)              = 0
-812   close(4<pipe:[1547]> <unfinished ...>
-811   close(6<pipe:[1548]> <unfinished ...>
-812   <... close resumed>)              = 0
-811   <... close resumed>)              = 0
-812   close(5<pipe:[1548]> <unfinished ...>
-811   getpid( <unfinished ...>
-812   <... close resumed>)              = 0
-811   <... getpid resumed>)             = 811
-812   dup3(3<pipe:[1547]>, 0</tmp/lab2/src/examples/zero.in>, 0 <unfinished ...>
-811   write(2<pipe:[6269]>, "[\320\240\320\276\320\264\320\270\321\202\320\265\320\273\321\214 PID=811] \320\277\320\276\321"..., 46 <unfinished ...>
-812   <... dup3 resumed>)               = 0<pipe:[1547]>
-811   <... write resumed>)              = 46
-812   close(3<pipe:[1547]> <unfinished ...>
-811   read(5<pipe:[1548]>,  <unfinished ...>
-812   <... close resumed>)              = 0
-812   dup3(6<pipe:[1548]>, 1<pipe:[6268]>, 0) = 1<pipe:[1548]>
-812   close(6<pipe:[1548]>)             = 0
-812   execve("./src/build/child", ["./src/build/child", "src/build/zero-result.txt"], 0xfffff5c8c668 /* 5 vars */) = 0
-812   brk(NULL)                         = 0xaaaae3c60000
-812   mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xffffb0e36000
-812   faccessat(AT_FDCWD</tmp/lab2>, "/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
-812   openat(AT_FDCWD</tmp/lab2>, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</etc/ld.so.cache>
-812   fstat(3</etc/ld.so.cache>, {st_mode=S_IFREG|0644, st_size=7247, ...}) = 0
-812   mmap(NULL, 7247, PROT_READ, MAP_PRIVATE, 3</etc/ld.so.cache>, 0) = 0xffffb0e34000
-812   close(3</etc/ld.so.cache>)        = 0
-812   openat(AT_FDCWD</tmp/lab2>, "/lib/aarch64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/aarch64-linux-gnu/libc.so.6>
-812   read(3</usr/lib/aarch64-linux-gnu/libc.so.6>, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\360\206\2\0\0\0\0\0"..., 832) = 832
-812   fstat(3</usr/lib/aarch64-linux-gnu/libc.so.6>, {st_mode=S_IFREG|0755, st_size=1722920, ...}) = 0
-812   mmap(NULL, 1892240, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0xffffb0c32000
-812   mmap(0xffffb0c40000, 1826704, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3</usr/lib/aarch64-linux-gnu/libc.so.6>, 0) = 0xffffb0c40000
-812   munmap(0xffffb0c32000, 57344)     = 0
-812   munmap(0xffffb0dfe000, 8080)      = 0
-812   mprotect(0xffffb0dda000, 77824, PROT_NONE) = 0
-812   mmap(0xffffb0ded000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3</usr/lib/aarch64-linux-gnu/libc.so.6>, 0x19d000) = 0xffffb0ded000
-812   mmap(0xffffb0df2000, 49040, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xffffb0df2000
-812   close(3</usr/lib/aarch64-linux-gnu/libc.so.6>) = 0
-812   set_tid_address(0xffffb0e36fb0)   = 812
-812   set_robust_list(0xffffb0e36fc0, 24) = 0
-812   rseq(0xffffb0e37600, 0x20, 0, 0xd428bc00) = 0
-812   mprotect(0xffffb0ded000, 12288, PROT_READ) = 0
-812   mprotect(0xaaaadb81f000, 4096, PROT_READ) = 0
-812   mprotect(0xffffb0e3e000, 8192, PROT_READ) = 0
-812   prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
-812   munmap(0xffffb0e34000, 7247)      = 0
-812   rt_sigaction(SIGPIPE, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=0}, NULL, 8) = 0
-812   rt_sigaction(SIGINT, {sa_handler=0xaaaadb8011e0, sa_mask=[], sa_flags=0}, NULL, 8) = 0
-812   rt_sigaction(SIGTERM, {sa_handler=0xaaaadb8011e0, sa_mask=[], sa_flags=0}, NULL, 8) = 0
-812   openat(AT_FDCWD</tmp/lab2>, "src/build/zero-result.txt", O_WRONLY|O_CREAT|O_TRUNC|O_NONBLOCK, 0644) = 3</tmp/lab2/src/build/zero-result.txt>
-812   getpid()                          = 812
-812   getppid()                         = 811
-812   write(2<pipe:[6269]>, "[\320\237\320\276\321\202\320\276\320\274\320\276\320\272 PID=812] \321\200\320\276\320\264\320"..., 58) = 58
-812   write(1<pipe:[1548]>, "A", 1 <unfinished ...>
-811   <... read resumed>"A", 1)         = 1
-812   <... write resumed>)              = 1
-811   ppoll([{fd=0</tmp/lab2/src/examples/zero.in>, events=POLLIN}, {fd=5<pipe:[1548]>, events=POLLIN}], 2, {tv_sec=0, tv_nsec=100000000}, NULL, 0 <unfinished ...>
-812   getrandom( <unfinished ...>
-811   <... ppoll resumed>)              = 1 ([{fd=0, revents=POLLIN}], left {tv_sec=0, tv_nsec=99999542})
-812   <... getrandom resumed>"\x5d\x8e\x97\xfd\x04\xd7\x0d\xc7", 8, GRND_NONBLOCK) = 8
-811   read(0</tmp/lab2/src/examples/zero.in>,  <unfinished ...>
-812   brk(NULL <unfinished ...>
-811   <... read resumed>"1", 1)         = 1
-812   <... brk resumed>)                = 0xaaaae3c60000
-811   write(4<pipe:[1547]>, "1", 1 <unfinished ...>
-812   brk(0xaaaae3c81000 <unfinished ...>
-811   <... write resumed>)              = 1
-812   <... brk resumed>)                = 0xaaaae3c81000
-811   ppoll([{fd=0</tmp/lab2/src/examples/zero.in>, events=POLLIN}, {fd=5<pipe:[1548]>, events=POLLIN}], 2, {tv_sec=0, tv_nsec=100000000}, NULL, 0 <unfinished ...>
-812   fstat(0<pipe:[1547]>,  <unfinished ...>
-811   <... ppoll resumed>)              = 1 ([{fd=0, revents=POLLIN}], left {tv_sec=0, tv_nsec=99999459})
-812   <... fstat resumed>{st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
-811   read(0</tmp/lab2/src/examples/zero.in>,  <unfinished ...>
-812   read(0<pipe:[1547]>,  <unfinished ...>
-811   <... read resumed>"2", 1)         = 1
-812   <... read resumed>"1", 4096)      = 1
-811   write(4<pipe:[1547]>, "2", 1 <unfinished ...>
-812   read(0<pipe:[1547]>,  <unfinished ...>
-811   <... write resumed>)              = 1
-812   <... read resumed>"2", 4096)      = 1
-811   ppoll([{fd=0</tmp/lab2/src/examples/zero.in>, events=POLLIN}, {fd=5<pipe:[1548]>, events=POLLIN}], 2, {tv_sec=0, tv_nsec=100000000}, NULL, 0 <unfinished ...>
-812   read(0<pipe:[1547]>,  <unfinished ...>
-811   <... ppoll resumed>)              = 1 ([{fd=0, revents=POLLIN}], left {tv_sec=0, tv_nsec=99999625})
-811   read(0</tmp/lab2/src/examples/zero.in>, " ", 1) = 1
-811   write(4<pipe:[1547]>, " ", 1)     = 1
-812   <... read resumed>" ", 4096)      = 1
-811   ppoll([{fd=0</tmp/lab2/src/examples/zero.in>, events=POLLIN}, {fd=5<pipe:[1548]>, events=POLLIN}], 2, {tv_sec=0, tv_nsec=100000000}, NULL, 0 <unfinished ...>
-812   read(0<pipe:[1547]>,  <unfinished ...>
-811   <... ppoll resumed>)              = 1 ([{fd=0, revents=POLLIN}], left {tv_sec=0, tv_nsec=99999584})
-811   read(0</tmp/lab2/src/examples/zero.in>, "2", 1) = 1
-811   write(4<pipe:[1547]>, "2", 1)     = 1
-812   <... read resumed>"2", 4096)      = 1
-811   ppoll([{fd=0</tmp/lab2/src/examples/zero.in>, events=POLLIN}, {fd=5<pipe:[1548]>, events=POLLIN}], 2, {tv_sec=0, tv_nsec=100000000}, NULL, 0 <unfinished ...>
-812   read(0<pipe:[1547]>,  <unfinished ...>
-811   <... ppoll resumed>)              = 1 ([{fd=0, revents=POLLIN}], left {tv_sec=0, tv_nsec=99999625})
-811   read(0</tmp/lab2/src/examples/zero.in>, "\n", 1) = 1
-811   write(4<pipe:[1547]>, "\n", 1)    = 1
-812   <... read resumed>"\n", 4096)     = 1
-811   read(5<pipe:[1548]>,  <unfinished ...>
-812   write(3</tmp/lab2/src/build/zero-result.txt>, "6\n", 2) = 2
-812   write(1<pipe:[1548]>, "A", 1)     = 1
-811   <... read resumed>"A", 1)         = 1
-812   read(0<pipe:[1547]>,  <unfinished ...>
-811   ppoll([{fd=0</tmp/lab2/src/examples/zero.in>, events=POLLIN}, {fd=5<pipe:[1548]>, events=POLLIN}], 2, {tv_sec=0, tv_nsec=100000000}, NULL, 0) = 1 ([{fd=0, revents=POLLIN}], left {tv_sec=0, tv_nsec=99999708})
-811   read(0</tmp/lab2/src/examples/zero.in>, "8", 1) = 1
-811   write(4<pipe:[1547]>, "8", 1)     = 1
-812   <... read resumed>"8", 4096)      = 1
-811   ppoll([{fd=0</tmp/lab2/src/examples/zero.in>, events=POLLIN}, {fd=5<pipe:[1548]>, events=POLLIN}], 2, {tv_sec=0, tv_nsec=100000000}, NULL, 0 <unfinished ...>
-812   read(0<pipe:[1547]>,  <unfinished ...>
-811   <... ppoll resumed>)              = 1 ([{fd=0, revents=POLLIN}], left {tv_sec=0, tv_nsec=99999667})
-811   read(0</tmp/lab2/src/examples/zero.in>, " ", 1) = 1
-811   write(4<pipe:[1547]>, " ", 1)     = 1
-812   <... read resumed>" ", 4096)      = 1
-811   ppoll([{fd=0</tmp/lab2/src/examples/zero.in>, events=POLLIN}, {fd=5<pipe:[1548]>, events=POLLIN}], 2, {tv_sec=0, tv_nsec=100000000}, NULL, 0 <unfinished ...>
-812   read(0<pipe:[1547]>,  <unfinished ...>
-811   <... ppoll resumed>)              = 1 ([{fd=0, revents=POLLIN}], left {tv_sec=0, tv_nsec=99999542})
-811   read(0</tmp/lab2/src/examples/zero.in>, "0", 1) = 1
-811   write(4<pipe:[1547]>, "0", 1)     = 1
-812   <... read resumed>"0", 4096)      = 1
-811   ppoll([{fd=0</tmp/lab2/src/examples/zero.in>, events=POLLIN}, {fd=5<pipe:[1548]>, events=POLLIN}], 2, {tv_sec=0, tv_nsec=100000000}, NULL, 0 <unfinished ...>
-812   read(0<pipe:[1547]>,  <unfinished ...>
-811   <... ppoll resumed>)              = 1 ([{fd=0, revents=POLLIN}], left {tv_sec=0, tv_nsec=99999542})
-811   read(0</tmp/lab2/src/examples/zero.in>, "\n", 1) = 1
-811   write(4<pipe:[1547]>, "\n", 1)    = 1
-812   <... read resumed>"\n", 4096)     = 1
-811   read(5<pipe:[1548]>,  <unfinished ...>
-812   write(2<pipe:[6269]>, "\320\237\320\276\321\202\320\276\320\274\320\276\320\272: \320\264\320\265\320\273\320\265\320\275\320\270\320\265 \320"..., 45) = 45
-812   write(1<pipe:[1548]>, "Z", 1 <unfinished ...>
-811   <... read resumed>"Z", 1)         = 1
-812   <... write resumed>)              = 1
-811   close(5<pipe:[1548]> <unfinished ...>
-812   close(3</tmp/lab2/src/build/zero-result.txt> <unfinished ...>
-811   <... close resumed>)              = 0
-812   <... close resumed>)              = 0
-811   close(4<pipe:[1547]> <unfinished ...>
-812   exit_group(2 <unfinished ...>
-811   <... close resumed>)              = 0
-812   <... exit_group resumed>)         = ?
-811   wait4(812,  <unfinished ...>
-812   +++ exited with 2 +++
-811   <... wait4 resumed>[{WIFEXITED(s) && WEXITSTATUS(s) == 2}], 0, NULL) = 812
-811   --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=812, si_uid=0, si_status=2, si_utime=0, si_stime=0} ---
-811   getpid()                          = 811
-811   write(2<pipe:[6269]>, "[\320\240\320\276\320\264\320\270\321\202\320\265\320\273\321\214 PID=811] \320\277\320\276\321"..., 95) = 95
-811   exit_group(2)                     = ?
-811   +++ exited with 2 +++
+22    execve("./parent", ["./parent"], 0xffffda06bf68 /* 6 vars */) = 0
+22    brk(NULL)                         = 0xaaaafd31c000
+22    mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xffffb9fc8000
+22    faccessat(AT_FDCWD, "/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+22    openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+22    fstat(3, {st_mode=S_IFREG|0644, st_size=6935, ...}) = 0
+22    mmap(NULL, 6935, PROT_READ, MAP_PRIVATE, 3, 0) = 0xffffb9fc6000
+22    close(3)                          = 0
+22    openat(AT_FDCWD, "/lib/aarch64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+22    read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\360\206\2\0\0\0\0\0@\0\0\0\0\0\0\0\350:\32\0\0\0\0\0\0\0\0\0@\08\0\n\0@\0=\0<\0\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0000\2\0\0\0\0\0\0000\2\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0000a\26\0\0\0\0\0000a\26\0\0\0\0\0000a\26\0\0\0\0\0\33\0\0\0\0\0\0\0\33\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\201\237\31\0\0\0\0\0\201\237\31\0\0\0\0\0\0\0\1\0\0\0\0\0\1\0\0\0\6\0\0\0\0\321\31\0\0\0\0\0\0\321\32\0\0\0\0\0"..., 832) = 832
+22    fstat(3, {st_mode=S_IFREG|0755, st_size=1722920, ...}) = 0
+22    mmap(NULL, 1892240, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0xffffb9dc4000
+22    mmap(0xffffb9dd0000, 1826704, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0xffffb9dd0000
+22    munmap(0xffffb9dc4000, 49152)     = 0
+22    munmap(0xffffb9f8e000, 16272)     = 0
+22    mprotect(0xffffb9f6a000, 77824, PROT_NONE) = 0
+22    mmap(0xffffb9f7d000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0xffffb9f7d000
+22    mmap(0xffffb9f82000, 49040, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xffffb9f82000
+22    close(3)                          = 0
+22    set_tid_address(0xffffb9fc8fb0)   = 22
+22    set_robust_list(0xffffb9fc8fc0, 24) = 0
+22    rseq(0xffffb9fc9600, 0x20, 0, 0xd428bc00) = 0
+22    mprotect(0xffffb9f7d000, 12288, PROT_READ) = 0
+22    mprotect(0xaaaac85ff000, 4096, PROT_READ) = 0
+22    mprotect(0xffffb9fd0000, 8192, PROT_READ) = 0
+22    prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+22    munmap(0xffffb9fc6000, 6935)      = 0
+22    getpid()                          = 22
+22    fstat(1, {st_mode=S_IFREG|0644, st_size=0, ...}) = 0
+22    getrandom("\x8f\x44\xbd\xf9\x68\xf4\x4c\x70", 8, GRND_NONBLOCK) = 8
+22    brk(NULL)                         = 0xaaaafd31c000
+22    brk(0xaaaafd33d000)               = 0xaaaafd33d000
+22    fstat(0, {st_mode=S_IFREG|0644, st_size=47, ...}) = 0
+22    read(0, "result.txt\n100 2 5\n12.5 2.5\n48 2 3 4\n10 0\n99 3\n", 4096) = 47
+22    rt_sigaction(SIGPIPE, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_INTERRUPT|SA_NODEFER|SA_RESETHAND|0xffffffff00000000}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+22    pipe2([3, 4], 0)                  = 0
+22    pipe2([5, 6], 0)                  = 0
+22    clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0xffffb9fc8fb0) = 23
+22    close(3 <unfinished ...>
+23    set_robust_list(0xffffb9fc8fc0, 24 <unfinished ...>
+22    <... close resumed>)              = 0
+23    <... set_robust_list resumed>)    = 0
+22    close(6)                          = 0
+23    close(4 <unfinished ...>
+22    write(4, "100 2 5\n", 8 <unfinished ...>
+23    <... close resumed>)              = 0
+22    <... write resumed>)              = 8
+23    close(5 <unfinished ...>
+22    read(5,  <unfinished ...>
+23    <... close resumed>)              = 0
+23    dup3(3, 0, 0)                     = 0
+23    dup3(6, 1, 0)                     = 1
+23    close(3)                          = 0
+23    close(6)                          = 0
+23    execve("./child", ["child", "result.txt"], 0xffffc5ea44b8 /* 6 vars */) = 0
+23    brk(NULL)                         = 0xaaaaf08ba000
+23    mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xffffb6f40000
+23    faccessat(AT_FDCWD, "/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+23    openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+23    fstat(3, {st_mode=S_IFREG|0644, st_size=6935, ...}) = 0
+23    mmap(NULL, 6935, PROT_READ, MAP_PRIVATE, 3, 0) = 0xffffb6f3e000
+23    close(3)                          = 0
+23    openat(AT_FDCWD, "/lib/aarch64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+23    read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\360\206\2\0\0\0\0\0@\0\0\0\0\0\0\0\350:\32\0\0\0\0\0\0\0\0\0@\08\0\n\0@\0=\0<\0\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0000\2\0\0\0\0\0\0000\2\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0000a\26\0\0\0\0\0000a\26\0\0\0\0\0000a\26\0\0\0\0\0\33\0\0\0\0\0\0\0\33\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\201\237\31\0\0\0\0\0\201\237\31\0\0\0\0\0\0\0\1\0\0\0\0\0\1\0\0\0\6\0\0\0\0\321\31\0\0\0\0\0\0\321\32\0\0\0\0\0"..., 832) = 832
+23    fstat(3, {st_mode=S_IFREG|0755, st_size=1722920, ...}) = 0
+23    mmap(NULL, 1892240, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0xffffb6d3c000
+23    mmap(0xffffb6d40000, 1826704, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0xffffb6d40000
+23    munmap(0xffffb6d3c000, 16384)     = 0
+23    munmap(0xffffb6efe000, 49040)     = 0
+23    mprotect(0xffffb6eda000, 77824, PROT_NONE) = 0
+23    mmap(0xffffb6eed000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0xffffb6eed000
+23    mmap(0xffffb6ef2000, 49040, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xffffb6ef2000
+23    close(3)                          = 0
+23    set_tid_address(0xffffb6f40fb0)   = 23
+23    set_robust_list(0xffffb6f40fc0, 24) = 0
+23    rseq(0xffffb6f41600, 0x20, 0, 0xd428bc00) = 0
+23    mprotect(0xffffb6eed000, 12288, PROT_READ) = 0
+23    mprotect(0xaaaab7c3f000, 4096, PROT_READ) = 0
+23    mprotect(0xffffb6f48000, 8192, PROT_READ) = 0
+23    prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+23    munmap(0xffffb6f3e000, 6935)      = 0
+23    getpid()                          = 23
+23    write(2, "PID \320\264\320\276\321\207\320\265\321\200\320\275\320\265\320\263\320\276 \320\277\321\200\320\276\321\206\320\265\321\201\321\201\320\260: 23\n", 44) = 44
+23    getrandom("\x47\x84\x68\x31\xd6\x31\xad\x14", 8, GRND_NONBLOCK) = 8
+23    brk(NULL)                         = 0xaaaaf08ba000
+23    brk(0xaaaaf08db000)               = 0xaaaaf08db000
+23    openat(AT_FDCWD, "result.txt", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3
+23    fstat(0, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+23    read(0, "100 2 5\n", 4096)        = 8
+23    fstat(3, {st_mode=S_IFREG|0644, st_size=0, ...}) = 0
+23    write(3, "10\n", 3)               = 3
+23    write(1, "0", 1 <unfinished ...>
+22    <... read resumed>"0", 1)         = 1
+23    <... write resumed>)              = 1
+22    write(4, "12.5 2.5\n", 9 <unfinished ...>
+23    read(0,  <unfinished ...>
+22    <... write resumed>)              = 9
+22    read(5,  <unfinished ...>
+23    <... read resumed>"12.5 2.5\n", 4096) = 9
+23    write(3, "5\n", 2)                = 2
+23    write(1, "0", 1 <unfinished ...>
+22    <... read resumed>"0", 1)         = 1
+23    <... write resumed>)              = 1
+22    write(4, "48 2 3 4\n", 9 <unfinished ...>
+23    read(0,  <unfinished ...>
+22    <... write resumed>)              = 9
+22    read(5,  <unfinished ...>
+23    <... read resumed>"48 2 3 4\n", 4096) = 9
+23    write(3, "2\n", 2)                = 2
+23    write(1, "0", 1 <unfinished ...>
+22    <... read resumed>"0", 1)         = 1
+23    <... write resumed>)              = 1
+22    write(4, "10 0\n", 5)             = 5
+23    read(0,  <unfinished ...>
+22    read(5,  <unfinished ...>
+23    <... read resumed>"10 0\n", 4096) = 5
+23    write(1, "1", 1 <unfinished ...>
+22    <... read resumed>"1", 1)         = 1
+23    <... write resumed>)              = 1
+22    close(4 <unfinished ...>
+23    close(3 <unfinished ...>
+22    <... close resumed>)              = 0
+22    close(5 <unfinished ...>
+23    <... close resumed>)              = 0
+22    <... close resumed>)              = 0
+22    wait4(23,  <unfinished ...>
+23    write(2, "\320\224\320\276\321\207\320\265\321\200\320\275\320\270\320\271 \320\277\321\200\320\276\321\206\320\265\321\201\321\201 \320\267\320\260\320\262\320\265\321\200\321\210\321\221\320\275\n", 49) = 49
+23    exit_group(0)                     = ?
+23    +++ exited with 0 +++
+22    <... wait4 resumed>[{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 23
+22    --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=23, si_uid=0, si_status=0, si_utime=0, si_stime=0} ---
+22    write(1, "PID \321\200\320\276\320\264\320\270\321\202\320\265\320\273\321\214\321\201\320\272\320\276\320\263\320\276 \320\277\321\200\320\276\321\206\320\265\321\201\321\201\320\260: 22\n\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\270\320\274\321\217 \321\204\320\260\320\271\320\273\320\260:\n\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \321\207\320\270\321\201\320\273\320\260:\n\320\236\321\210\320\270\320\261\320\272\320\260: \320\264\320\265\320\273\320\265\320\275\320\270\320\265 \320\275\320\260 \320\275\320\276\320\273\321\214\n\320\240\320\276\320\264\320\270\321\202\320\265\320\273\321\214\321\201\320\272\320\270\320\271 \320\277\321\200\320\276\321\206\320\265\321\201\321\201 \320\267\320\260\320\262\320\265\321\200\321\210\321\221\320\275\n", 213) = 213
+22    lseek(0, -5, SEEK_CUR)            = 42
+22    exit_group(0)                     = ?
+22    +++ exited with 0 +++
