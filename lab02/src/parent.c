@@ -161,10 +161,10 @@ int main(void) {
         return 1;
     }
 
-    if (!WIFEXITED(status) || WEXITSTATUS(status) != 0) {
-        fprintf(stderr, "Ошибка дочернего процесса\n");
-        return 1;
-    }
+    if (status != 0) {
+    fprintf(stderr, "Ошибка дочернего процесса\n");
+    return 1;
+		}
 
     printf("Родительский процесс завершён\n");
 
