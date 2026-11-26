@@ -1,90 +1,87 @@
-1177  execve("./main", ["./main"], 0xffffca3358e8 /* 8 vars */) = 0
-1177  brk(NULL)                         = 0xaaab11e9c000
-1177  mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xffffb3b3b000
-1177  faccessat(AT_FDCWD, "/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
-1177  openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
-1177  fstat(3, {st_mode=S_IFREG|0644, st_size=8408, ...}) = 0
-1177  mmap(NULL, 8408, PROT_READ, MAP_PRIVATE, 3, 0) = 0xffffb3b38000
-1177  close(3)                          = 0
-1177  openat(AT_FDCWD, "/lib/aarch64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
-1177  read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\360\206\2\0\0\0\0\0"..., 832) = 832
-1177  fstat(3, {st_mode=S_IFREG|0755, st_size=1722920, ...}) = 0
-1177  mmap(NULL, 1892240, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0xffffb3937000
-1177  mmap(0xffffb3940000, 1826704, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0xffffb3940000
-1177  munmap(0xffffb3937000, 36864)     = 0
-1177  munmap(0xffffb3afe000, 28560)     = 0
-1177  mprotect(0xffffb3ada000, 77824, PROT_NONE) = 0
-1177  mmap(0xffffb3aed000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0xffffb3aed000
-1177  mmap(0xffffb3af2000, 49040, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xffffb3af2000
-1177  close(3)                          = 0
-1177  set_tid_address(0xffffb3b3bfb0)   = 1177
-1177  set_robust_list(0xffffb3b3bfc0, 24) = 0
-1177  rseq(0xffffb3b3c600, 0x20, 0, 0xd428bc00) = 0
-1177  mprotect(0xffffb3aed000, 12288, PROT_READ) = 0
-1177  mprotect(0xaaaae71ff000, 4096, PROT_READ) = 0
-1177  mprotect(0xffffb3b43000, 8192, PROT_READ) = 0
-1177  prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
-1177  munmap(0xffffb3b38000, 8408)      = 0
-1177  getpid()                          = 1177
-1177  fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(0x88, 0), ...}) = 0
-1177  getrandom("\xca\xc4\x53\xda\x7b\xb9\x03\x8d", 8, GRND_NONBLOCK) = 8
-1177  brk(NULL)                         = 0xaaab11e9c000
-1177  brk(0xaaab11ebd000)               = 0xaaab11ebd000
-1177  write(1, "PID \321\200\320\276\320\264\320\270\321\202\320\265\320\273\321\214\321\201\320\272\320\276\320\263\320\276 \320"..., 54) = 54
-1177  write(1, "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\270\320\274\321\217 \321\204\320\260\320\271\320\273\320\260"..., 34) = 34
-1177  fstat(0, {st_mode=S_IFCHR|0620, st_rdev=makedev(0x88, 0), ...}) = 0
-1177  read(0, "result.txt\n", 1024)     = 11
-1177  openat(AT_FDCWD, "result.txt", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3
-1177  openat(AT_FDCWD, "/tmp", O_RDWR|O_EXCL|O_TMPFILE, 0600) = 4
-1177  fcntl(4, F_GETFL)                 = 0x424002 (flags O_RDWR|O_LARGEFILE|O_TMPFILE)
-1177  write(1, "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \321\207\320\270\321\201\320\273\320\260:\n", 27) = 27
-1177  read(0, "20 2 5\n", 1024)         = 7
-1177  ftruncate(4, 8)                   = 0
-1177  mmap(NULL, 8, PROT_READ|PROT_WRITE, MAP_SHARED, 4, 0) = 0xffffb3b3a000
-1177  clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0xffffb3b3bfb0) = 1178
-1177  wait4(1178,  <unfinished ...>
-1178  set_robust_list(0xffffb3b3bfc0, 24) = 0
-1178  getpid()                          = 1178
-1178  write(1, "PID \320\264\320\276\321\207\320\265\321\200\320\275\320\265\320\263\320\276 \320\277\321\200\320\276\321\206\320"..., 46) = 46
-1178  write(3, "2\n", 2)                = 2
-1178  munmap(0xffffb3b3a000, 8)         = 0
-1178  exit_group(0)                     = ?
-1178  +++ exited with 0 +++
-1177  <... wait4 resumed>[{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 1178
-1177  --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1178, si_uid=0, si_status=0, si_utime=0, si_stime=0} ---
-1177  munmap(0xffffb3b3a000, 8)         = 0
-1177  read(0, "60 3 2\n", 1024)         = 7
-1177  ftruncate(4, 8)                   = 0
-1177  mmap(NULL, 8, PROT_READ|PROT_WRITE, MAP_SHARED, 4, 0) = 0xffffb3b3a000
-1177  clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0xffffb3b3bfb0) = 1179
-1177  wait4(1179,  <unfinished ...>
-1179  set_robust_list(0xffffb3b3bfc0, 24) = 0
-1179  getpid()                          = 1179
-1179  write(1, "PID \320\264\320\276\321\207\320\265\321\200\320\275\320\265\320\263\320\276 \320\277\321\200\320\276\321\206\320"..., 46) = 46
-1179  write(3, "10\n", 3)               = 3
-1179  munmap(0xffffb3b3a000, 8)         = 0
-1179  exit_group(0)                     = ?
-1179  +++ exited with 0 +++
-1177  <... wait4 resumed>[{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 1179
-1177  --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1179, si_uid=0, si_status=0, si_utime=0, si_stime=0} ---
-1177  munmap(0xffffb3b3a000, 8)         = 0
-1177  read(0, "12 0\n", 1024)           = 5
-1177  ftruncate(4, 6)                   = 0
-1177  mmap(NULL, 6, PROT_READ|PROT_WRITE, MAP_SHARED, 4, 0) = 0xffffb3b3a000
-1177  clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0xffffb3b3bfb0) = 1180
-1177  wait4(1180,  <unfinished ...>
-1180  set_robust_list(0xffffb3b3bfc0, 24) = 0
-1180  getpid()                          = 1180
-1180  write(1, "PID \320\264\320\276\321\207\320\265\321\200\320\275\320\265\320\263\320\276 \320\277\321\200\320\276\321\206\320"..., 46) = 46
-1180  munmap(0xffffb3b3a000, 6)         = 0
-1180  exit_group(2)                     = ?
-1180  +++ exited with 2 +++
-1177  <... wait4 resumed>[{WIFEXITED(s) && WEXITSTATUS(s) == 2}], 0, NULL) = 1180
-1177  --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1180, si_uid=0, si_status=2, si_utime=0, si_stime=0} ---
-1177  munmap(0xffffb3b3a000, 6)         = 0
-1177  write(1, "\320\236\321\210\320\270\320\261\320\272\320\260: \320\264\320\265\320\273\320\265\320\275\320\270\320\265 \320\275\320"..., 43) = 43
-1177  write(1, "\320\240\320\276\320\264\320\270\321\202\320\265\320\273\321\214\321\201\320\272\320\270\320\271 \320\277\321\200\320\276\321"..., 57) = 57
-1177  close(4)                          = 0
-1177  close(3)                          = 0
-1177  exit_group(0)                     = ?
-1177  +++ exited with 0 +++
+18    execve("./main", ["./main"], 0xffffd6669118 /* 4 vars */) = 0
+18    brk(NULL)                         = 0xaaaafc95a000
+18    mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xffff9b4e2000
+18    faccessat(AT_FDCWD, "/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+18    openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+18    fstat(3, {st_mode=S_IFREG|0644, st_size=6935, ...}) = 0
+18    mmap(NULL, 6935, PROT_READ, MAP_PRIVATE, 3, 0) = 0xffff9b4e0000
+18    close(3)                          = 0
+18    openat(AT_FDCWD, "/lib/aarch64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+18    read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0\267\0\1\0\0\0\360\206\2\0\0\0\0\0"..., 832) = 832
+18    fstat(3, {st_mode=S_IFREG|0755, st_size=1722920, ...}) = 0
+18    mmap(NULL, 1892240, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_DENYWRITE, -1, 0) = 0xffff9b2de000
+18    mmap(0xffff9b2e0000, 1826704, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0xffff9b2e0000
+18    munmap(0xffff9b2de000, 8192)      = 0
+18    munmap(0xffff9b49e000, 57232)     = 0
+18    mprotect(0xffff9b47a000, 77824, PROT_NONE) = 0
+18    mmap(0xffff9b48d000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0xffff9b48d000
+18    mmap(0xffff9b492000, 49040, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xffff9b492000
+18    close(3)                          = 0
+18    set_tid_address(0xffff9b4e2fb0)   = 18
+18    set_robust_list(0xffff9b4e2fc0, 24) = 0
+18    rseq(0xffff9b4e3600, 0x20, 0, 0xd428bc00) = 0
+18    mprotect(0xffff9b48d000, 12288, PROT_READ) = 0
+18    mprotect(0xaaaadbc9f000, 4096, PROT_READ) = 0
+18    mprotect(0xffff9b4ea000, 8192, PROT_READ) = 0
+18    prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+18    munmap(0xffff9b4e0000, 6935)      = 0
+18    getpid()                          = 18
+18    fstat(1, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+18    getrandom("\xbd\x87\xe9\xe7\x19\x18\xb0\x3d", 8, GRND_NONBLOCK) = 8
+18    brk(NULL)                         = 0xaaaafc95a000
+18    brk(0xaaaafc97b000)               = 0xaaaafc97b000
+18    fstat(0, {st_mode=S_IFREG|0644, st_size=35, ...}) = 0
+18    read(0, "result.txt\n20 2 5\n60 3 2\n12 0\n99"..., 4096) = 35
+18    openat(AT_FDCWD, "result.txt", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3
+18    openat(AT_FDCWD, "/tmp", O_RDWR|O_EXCL|O_TMPFILE, 0600) = 4
+18    fcntl(4, F_GETFL)                 = 0x424002 (flags O_RDWR|O_LARGEFILE|O_TMPFILE)
+18    write(1, "PID \321\200\320\276\320\264\320\270\321\202\320\265\320\273\321\214\321\201\320\272\320\276\320\263\320\276 \320"..., 113) = 113
+18    ftruncate(4, 8)                   = 0
+18    mmap(NULL, 8, PROT_READ|PROT_WRITE, MAP_SHARED, 4, 0) = 0xffff9b4e1000
+18    clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0xffff9b4e2fb0) = 19
+18    wait4(19,  <unfinished ...>
+19    set_robust_list(0xffff9b4e2fc0, 24) = 0
+19    getpid()                          = 19
+19    write(1, "PID \320\264\320\276\321\207\320\265\321\200\320\275\320\265\320\263\320\276 \320\277\321\200\320\276\321\206\320"..., 44) = 44
+19    write(3, "2\n", 2)                = 2
+19    munmap(0xffff9b4e1000, 8)         = 0
+19    exit_group(0)                     = ?
+19    +++ exited with 0 +++
+18    <... wait4 resumed>[{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 19
+18    --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=19, si_uid=0, si_status=0, si_utime=0, si_stime=0} ---
+18    munmap(0xffff9b4e1000, 8)         = 0
+18    ftruncate(4, 8)                   = 0
+18    mmap(NULL, 8, PROT_READ|PROT_WRITE, MAP_SHARED, 4, 0) = 0xffff9b4e1000
+18    clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0xffff9b4e2fb0) = 20
+20    set_robust_list(0xffff9b4e2fc0, 24 <unfinished ...>
+18    wait4(20,  <unfinished ...>
+20    <... set_robust_list resumed>)    = 0
+20    getpid()                          = 20
+20    write(1, "PID \320\264\320\276\321\207\320\265\321\200\320\275\320\265\320\263\320\276 \320\277\321\200\320\276\321\206\320"..., 44) = 44
+20    write(3, "10\n", 3)               = 3
+20    munmap(0xffff9b4e1000, 8)         = 0
+20    exit_group(0)                     = ?
+20    +++ exited with 0 +++
+18    <... wait4 resumed>[{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 20
+18    --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=20, si_uid=0, si_status=0, si_utime=0, si_stime=0} ---
+18    munmap(0xffff9b4e1000, 8)         = 0
+18    ftruncate(4, 6)                   = 0
+18    mmap(NULL, 6, PROT_READ|PROT_WRITE, MAP_SHARED, 4, 0) = 0xffff9b4e1000
+18    clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0xffff9b4e2fb0) = 21
+21    set_robust_list(0xffff9b4e2fc0, 24 <unfinished ...>
+18    wait4(21,  <unfinished ...>
+21    <... set_robust_list resumed>)    = 0
+21    getpid()                          = 21
+21    write(1, "PID \320\264\320\276\321\207\320\265\321\200\320\275\320\265\320\263\320\276 \320\277\321\200\320\276\321\206\320"..., 44) = 44
+21    munmap(0xffff9b4e1000, 6)         = 0
+21    exit_group(2)                     = ?
+21    +++ exited with 2 +++
+18    <... wait4 resumed>[{WIFEXITED(s) && WEXITSTATUS(s) == 2}], 0, NULL) = 21
+18    --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=21, si_uid=0, si_status=2, si_utime=0, si_stime=0} ---
+18    munmap(0xffff9b4e1000, 6)         = 0
+18    close(4)                          = 0
+18    close(3)                          = 0
+18    write(1, "\320\236\321\210\320\270\320\261\320\272\320\260: \320\264\320\265\320\273\320\265\320\275\320\270\320\265 \320\275\320"..., 100) = 100
+18    lseek(0, -5, SEEK_CUR)            = 30
+18    exit_group(0)                     = ?
+18    +++ exited with 0 +++
