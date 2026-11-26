@@ -72,7 +72,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    if (ferror(stdin)) {
+    if (ferror(stdin) != 0) {
         perror("Ошибка getline");
         error = 1;
     }

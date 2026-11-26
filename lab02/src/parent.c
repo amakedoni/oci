@@ -44,12 +44,12 @@ int main(void) {
     printf("PID родительского процесса: %d\n", (int)getpid());
     printf("Введите имя файла:\n");
 
-    if (!fgets(filename, sizeof(filename), stdin)) {
+    if (fgets(filename, sizeof(filename), stdin) == NULL) {
         fprintf(stderr, "Ошибка ввода имени файла\n");
         return 1;
     }
 
-    if (!strchr(filename, '\n')) {
+    if (strchr(filename, '\n') == NULL) {
         fprintf(stderr, "Слишком длинное или неполное имя файла\n");
         return 1;
     }
@@ -85,7 +85,7 @@ int main(void) {
     }
 
     if (pid == 0) {
-        if (close_fd(p1[1]) | close_fd(p2[0])) {
+        if ((close_fd(p1[1]) | close_fd(p2[0])) == 1) {
             _exit(1);
         }
 
@@ -95,7 +95,7 @@ int main(void) {
             _exit(1);
         }
 
-        if (close_fd(p1[0]) | close_fd(p2[1])) {
+        if ((close_fd(p1[0]) | close_fd(p2[1])) == 1) {
             _exit(1);
         }
 
@@ -111,9 +111,9 @@ int main(void) {
 
     ssize_t len = 0;
 
-    while (!error && (len = getline(&line, &size, stdin)) != -1) {
-        if (send_line(p1[1], line, len) ||
-            (line[len - 1] != '\n' && send_line(p1[1], "\n", 1))) {
+    while (error == 0 && (len = getline(&line, &size, stdin)) != -1) {
+        if (send_line(p1[1], line, len) == 1 ||
+            (line[len - 1] != '\n' && send_line(p1[1], "\n", 1) == 1)) {
             error = 1;
             break;
         }
@@ -142,7 +142,7 @@ int main(void) {
         }
     }
 
-    if (!error && len == -1 && !feof(stdin)) {
+    if (error == 0 && len == -1 && feof(stdin) == 0) {
         perror("Ошибка getline");
         error = 1;
     }

@@ -1,3 +1,4 @@
+
 #include <errno.h>
 #include <fcntl.h>
 #include <stdint.h>
@@ -18,13 +19,13 @@ static int fail(const char *message) {
 static int divide_line(char *line, int output) {
     char *number = strtok(line, " \t\n\r");
 
-    if (!number) {
+    if (number == NULL) {
         return 0;
     }
 
     float result = strtof(number, NULL);
 
-    while ((number = strtok(NULL, " \t\n\r"))) {
+    while ((number = strtok(NULL, " \t\n\r")) != NULL) {
         float divisor = strtof(number, NULL);
 
         if (divisor == 0) {
@@ -82,7 +83,7 @@ static int process_line(int fd, char *input, size_t length, int output) {
 
         if (waited == -1) {
             perror("Ошибка waitpid");
-        } else if (WIFEXITED(status)) {
+        } else if (WIFEXITED(status) != 0) {
             result = WEXITSTATUS(status);
         } else {
             fprintf(stderr, "Ошибка дочернего процесса\n");
@@ -125,7 +126,7 @@ int main(void) {
 
     temp = tmpfile();
 
-    if (!temp) {
+    if (temp == NULL) {
         goto failed;
     }
 
@@ -158,7 +159,7 @@ int main(void) {
         }
     }
 
-    if (length == -1 && !feof(stdin)) {
+    if (length == -1 && feof(stdin) == 0) {
         goto failed;
     }
 
@@ -171,7 +172,7 @@ failed:
 cleanup:
     free(input);
 
-    if (temp && fclose(temp) == EOF) {
+    if (temp != NULL && fclose(temp) == EOF) {
         error = fail("Ошибка fclose");
     }
 

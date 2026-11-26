@@ -19,11 +19,11 @@ typedef struct {
 void *worker(void *arg) {
     Data *d = arg;
 
-    if (d->show_tid) {
-    	uint64_t tid = 0;
-    	pthread_threadid_np(NULL, &tid);
-    	printf("PID процесса: %d, TID потока: %" PRIu64 "\n", getpid(), tid);
-		}	
+    if (d->show_tid != 0) {
+        uint64_t tid = 0;
+        pthread_threadid_np(NULL, &tid);
+        printf("PID процесса: %d, TID потока: %" PRIu64 "\n", getpid(), tid);
+    }
 
     for (int i = d->start; i < d->end; i++) {
         double min = 0;
@@ -55,8 +55,8 @@ int kmeans(double points[][2], int n, int k, int t) {
     pthread_t *threads = malloc(t * sizeof(pthread_t));
     Data *data = malloc(t * sizeof(Data));
 
-    if (!centers || !sum || !labels ||
-        !count || !threads || !data) {
+    if (centers == NULL || sum == NULL || labels == NULL ||
+        count == NULL || threads == NULL || data == NULL) {
         perror("Ошибка выделения памяти");
         goto cleanup;
     }
@@ -144,7 +144,7 @@ int kmeans(double points[][2], int n, int k, int t) {
             centers[j][1] = y;
         }
 
-        if (!changed)
+        if (changed == 0)
             break;
     }
 
