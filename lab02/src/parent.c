@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -19,8 +18,9 @@ int send_line(int fd, char *line, size_t len) {
     while (len > 0) {
         ssize_t n = write(fd, line, len);
 
-        if (n == -1 && errno == EINTR)
+        if (n == -1 && errno == EINTR) {
             continue;
+        }
 
         if (n <= 0) {
             perror("Ошибка write");
@@ -36,6 +36,7 @@ int send_line(int fd, char *line, size_t len) {
 int main(void) {
     int p1[2], p2[2], status;
     int error = 0;
+
     char filename[256];
     char *line = NULL;
     size_t size = 0;
@@ -84,8 +85,9 @@ int main(void) {
     }
 
     if (pid == 0) {
-        if (close_fd(p1[1]) | close_fd(p2[0]))
+        if (close_fd(p1[1]) | close_fd(p2[0])) {
             _exit(1);
+        }
 
         if (dup2(p1[0], STDIN_FILENO) == -1 ||
             dup2(p2[1], STDOUT_FILENO) == -1) {
@@ -93,8 +95,9 @@ int main(void) {
             _exit(1);
         }
 
-        if (close_fd(p1[0]) | close_fd(p2[1]))
+        if (close_fd(p1[0]) | close_fd(p2[1])) {
             _exit(1);
+        }
 
         execl("./child", "child", filename, NULL);
         perror("Ошибка execl");
@@ -110,8 +113,7 @@ int main(void) {
 
     while (!error && (len = getline(&line, &size, stdin)) != -1) {
         if (send_line(p1[1], line, len) ||
-            (line[len - 1] != '\n' &&
-             send_line(p1[1], "\n", 1))) {
+            (line[len - 1] != '\n' && send_line(p1[1], "\n", 1))) {
             error = 1;
             break;
         }
@@ -124,10 +126,11 @@ int main(void) {
         } while (n == -1 && errno == EINTR);
 
         if (n != 1) {
-            if (n == -1)
+            if (n == -1) {
                 perror("Ошибка read");
-            else
+            } else {
                 fprintf(stderr, "Дочерний процесс завершился\n");
+            }
 
             error = 1;
             break;
@@ -160,9 +163,9 @@ int main(void) {
     }
 
     if (status != 0) {
-    fprintf(stderr, "Ошибка дочернего процесса\n");
-    return 1;
-		}
+        fprintf(stderr, "Ошибка дочернего процесса\n");
+        return 1;
+    }
 
     printf("Родительский процесс завершён\n");
 

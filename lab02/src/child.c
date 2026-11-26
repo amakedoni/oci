@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -69,8 +67,9 @@ int main(int argc, char *argv[]) {
             break;
         }
 
-        if (answer == '1')
+        if (answer == '1') {
             break;
+        }
     }
 
     if (ferror(stdin)) {
