@@ -1,4 +1,4 @@
-
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -13,10 +13,16 @@ typedef struct {
     int start;
     int end;
     int k;
+    int show_tid;
 } Data;
 
 void *worker(void *arg) {
     Data *d = arg;
+
+#ifdef __linux__
+    if (d->show_tid)
+        printf("TID потока: %d\n", gettid());
+#endif
 
     for (int i = d->start; i < d->end; i++) {
         double min = 0;
@@ -73,7 +79,8 @@ int kmeans(double points[][2], int n, int k, int t) {
             data[i] = (Data){
                 points, centers, labels,
                 (int)((long long)n * i / t),
-                (int)((long long)n * (i + 1) / t), k
+                (int)((long long)n * (i + 1) / t),
+                k, iter == 0
             };
         }
 
@@ -151,7 +158,8 @@ int kmeans(double points[][2], int n, int k, int t) {
     printf("\nРезультаты кластеризации:\n");
 
     for (int j = 0; j < k; j++) {
-        printf("Кластер %d: центр (%.2f, %.2f)\n", j + 1, centers[j][0], centers[j][1]);
+        printf("Кластер %d: центр (%.2f, %.2f)\n",
+               j + 1, centers[j][0], centers[j][1]);
     }
 
     printf("\nВремя выполнения: %.9f секунд\n", time);
