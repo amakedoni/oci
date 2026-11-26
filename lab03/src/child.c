@@ -1,4 +1,4 @@
-#define _GNU_SOURCE
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -19,10 +19,11 @@ typedef struct {
 void *worker(void *arg) {
     Data *d = arg;
 
-#ifdef __linux__
-    if (d->show_tid)
-        printf("TID потока: %d\n", gettid());
-#endif
+    if (d->show_tid) {
+    	uint64_t tid = 0;
+    	pthread_threadid_np(NULL, &tid);
+    	printf("PID процесса: %d, TID потока: %" PRIu64 "\n", getpid(), tid);
+		}	
 
     for (int i = d->start; i < d->end; i++) {
         double min = 0;
